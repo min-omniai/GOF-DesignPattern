@@ -77,3 +77,46 @@ public interface IDamageable
 
 💬 책임: 자동 발사만 담당
 ```
+
+---
+
+**프로젝트 구조 (추가)**
+```
+Assets/
+├─ Scripts/
+│  ├─ Interfaces/
+│  │  └─ IDamageable.cs
+│  ├─ Components/
+│  │  ├─ AI/
+│  │  │  └─ EnemyAIComponent.cs
+│  │  ├─ Combat/
+│  │  │  ├─ TankShootComponent.cs
+│  │  │  └─ AutoShootComponent.cs
+│  │  └─ Effects/
+│  │     ├─ DamageFlashComponent.cs
+│  │     └─ DeathEffectComponent.cs
+│  └─ Effects/
+│     └─ ExplosionEffect.cs
+└─ Prefabs/
+   ├─ Bullet.prefab
+   └─ ExplosionEffect.prefab
+```
+
+**GameObject 구성 (추가)**
+```
+PlayerTank
+├─ TankMoveComponent
+├─ TankShootComponent
+├─ TankHealthComponent (IDamageable)
+├─ DamageFlashComponent
+├─ DeathEffectComponent
+└─ FirePoint
+
+EnemyTank
+├─ EnemyAIComponent
+├─ AutoShootComponent
+├─ TankHealthComponent (IDamageable)
+├─ DamageFlashComponent
+├─ DeathEffectComponent
+└─ EnemyFirePoint
+```
