@@ -82,12 +82,4 @@ PlayerTank
 ├─ DamageFlashComponent
 ├─ DeathEffectComponent
 └─ FirePoint
-
-EnemyTank
-├─ EnemyAIComponent
-├─ AutoShootComponent
-├─ TankHealthComponent (IDamageable)
-├─ DamageFlashComponent
-├─ DeathEffectComponent
-└─ EnemyFirePoint
 ```
