@@ -78,8 +78,16 @@ Assets/
 PlayerTank
 ├─ TankMoveComponent
 ├─ TankShootComponent
-├─ TankHealthComponent
-├─ Rigidbody
-├─ Collider
-└─ FirePoint (Transform)
+├─ TankHealthComponent (IDamageable)
+├─ DamageFlashComponent
+├─ DeathEffectComponent
+└─ FirePoint
+
+EnemyTank
+├─ EnemyAIComponent
+├─ AutoShootComponent
+├─ TankHealthComponent (IDamageable)
+├─ DamageFlashComponent
+├─ DeathEffectComponent
+└─ EnemyFirePoint
 ```
