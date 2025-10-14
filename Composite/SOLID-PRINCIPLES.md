@@ -125,3 +125,145 @@ void OnTriggerEnter(Collider other)
 - 구현체 교체 자유로움
 - 다형성 활용
 - 유연한 설계
+
+---
+
+### 4️⃣ I - 인터페이스 분리 원칙 (Interface Segregation Principle)
+
+**정의: 인터페이스는 작게 분리해야 한다.**
+
+**적용 사례**
+
+**과제 2**
+```csharp
+// ✅ ISP 준수 (작은 인터페이스)
+public interface IDamageable
+{
+    void TakeDamage(int damage);  // 1개만
+}
+
+public interface IHealable
+{
+    void Heal(int amount);
+}
+
+public interface IStunnable
+{
+    void Stun(float duration);
+}
+
+// 필요한 것만 구현
+public class TankHealthComponent : MonoBehaviour, IDamageable
+{
+    public void TakeDamage(int damage) { }
+}
+
+public class PlayerHealth : MonoBehaviour, IDamageable, IHealable
+{
+    public void TakeDamage(int damage) { }
+    public void Heal(int amount) { }
+}
+```
+
+**만약 큰 인터페이스였다면? (안티패턴)**
+```
+// ❌ ISP 위반
+public interface IEntity
+{
+    void TakeDamage(int damage);
+    void Heal(int amount);
+    void Stun(float duration);
+    void Buff(string buffName);
+}
+
+// 건물은 Heal/Stun 필요 없는데 강제 구현
+public class Building : MonoBehaviour, IEntity
+{
+    public void TakeDamage(int damage) { }  // 사용
+    public void Heal(int amount) { throw new NotImplementedException(); }
+    public void Stun(float duration) { throw new NotImplementedException(); }
+    public void Buff(string buffName) { throw new NotImplementedException(); }
+}
+```
+
+**효과**
+- 불필요한 메서드 구현 강제 안 함
+- 인터페이스 목적 명확
+- 결합도 감소
+
+---
+
+### 5️⃣ D - 의존성 역전 원칙 (Dependency Inversion Principle)
+
+**정의: 구체 클래스가 아닌 추상(인터페이스)에 의존해야 한다.**
+
+**적용 사례**
+
+**과제 1 vs 과제 2**
+```csharp
+// ❌ DIP 위반 (과제 1)
+void OnTriggerEnter(Collider other)
+{
+    // 구체 클래스에 의존
+    TankHealthComponent health = other.GetComponent<TankHealthComponent>();
+    if (health != null) health.TakeDamage(damage);
+}
+
+// ✅ DIP 준수 (과제 2)
+void OnTriggerEnter(Collider other)
+{
+    // 인터페이스에 의존
+    if (other.TryGetComponent<IDamageable>(out var target))
+    {
+        target.TakeDamage(damage);
+    }
+}
+```
+
+**이벤트 시스템에서도 DIP**
+```csharp
+// 발행자는 구독자를 모름 (추상에 의존)
+public class TankHealthComponent : MonoBehaviour
+{
+    public event Action<int, int> OnDamaged;
+    
+    public void TakeDamage(int damage)
+    {
+        OnDamaged?.Invoke(currentHp, maxHp);
+        // 누가 구독하는지 몰라도 됨
+    }
+}
+
+// 구독자
+public class DamageFlashComponent : MonoBehaviour
+{
+    void Start()
+    {
+        GetComponent<TankHealthComponent>().OnDamaged += Flash;
+        // 새로 추가해도 TankHealthComponent 수정 안 함
+    }
+}
+```
+
+**의존 관계 다이어그램**
+
+**Before (높은 결합)**
+```
+Bullet → TankHealthComponent
+(구체 클래스에 직접 의존)
+```
+
+**After (낮은 결합)**
+```
+Bullet → IDamageable ← TankHealthComponent
+                    ← ShieldComponent
+                    ← BuildingHealth
+(인터페이스에 의존, 구현체 교체 가능)
+```
+
+**효과**
+- 느슨한 결합
+- 테스트 용이 (Mock 객체)
+- 확장성/유지보수성 증가
+
+---
