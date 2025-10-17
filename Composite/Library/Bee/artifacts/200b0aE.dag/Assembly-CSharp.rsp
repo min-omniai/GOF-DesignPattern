@@ -438,6 +438,8 @@
 -analyzer:"/Applications/Unity/Hub/Editor/6000.2.7f2/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/Applications/Unity/Hub/Editor/6000.2.7f2/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"/Applications/Unity/Hub/Editor/6000.2.7f2/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
+"Assets/Component/Scripts/Data/AIStats/AIStatsSO.cs"
+"Assets/Component/Scripts/Data/WeaponStats/WeaponStatsSO.cs"
 "Assets/Component/Scripts/Task1/Combat/TankShootComponent.cs"
 "Assets/Component/Scripts/Task1/Health/TankHealthComponent.cs"
 "Assets/Component/Scripts/Task1/Movement/TankMoveComponent.cs"
@@ -450,6 +452,13 @@
 "Assets/Component/Scripts/Task2/Interfaces/IDamageable.cs"
 "Assets/Component/Scripts/Task2/Movement/EnemyAIComponent.cs"
 "Assets/Component/Scripts/Task2/Projectiles/Bullet2.cs"
+"Assets/Component/Scripts/Task3/Combat/AutoShootComponent3.cs"
+"Assets/Component/Scripts/Task3/Combat/TankShootComponent3.cs"
+"Assets/Component/Scripts/Task3/Data/ScriptableObjects/TankStatsSO.cs"
+"Assets/Component/Scripts/Task3/Health/TankHealthComponent3.cs"
+"Assets/Component/Scripts/Task3/Movement/EnemyAIComponent3.cs"
+"Assets/Component/Scripts/Task3/Movement/TankMoveComponent3.cs"
+"Assets/Component/Scripts/Task3/Projectiles/Bullet3.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0
 /deterministic
