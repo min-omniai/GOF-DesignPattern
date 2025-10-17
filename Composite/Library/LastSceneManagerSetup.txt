@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Component/Scenes/Task2.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
